@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","names":["ListKeymap"],"sources":["../src/index.ts"],"sourcesContent":["import { ListKeymap } from '@tiptap/extension-list'\n\nexport type { ListKeymapOptions } from '@tiptap/extension-list'\nexport { listHelpers, ListKeymap } from '@tiptap/extension-list'\n\nexport default ListKeymap\n"],"mappings":";;AAKA,IAAA,cAAeA"}

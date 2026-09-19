@@ -1,0 +1,41 @@
+
+> papra-mobile@1.0.0 build
+> vite build
+
+[36mvite v7.3.6 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 828 modules transformed.
+rendering chunks...
+[33m[plugin vite:reporter] 
+(!) C:/Users/Sai Neela/Documents/Random Projects/Papra/src/api/client.ts is dynamically imported by C:/Users/Sai Neela/Documents/Random Projects/Papra/src/pages/DocumentDetailPage.vue?vue&type=script&setup=true&lang.ts, C:/Users/Sai Neela/Documents/Random Projects/Papra/src/pages/DocumentDetailPage.vue?vue&type=script&setup=true&lang.ts, C:/Users/Sai Neela/Documents/Random Projects/Papra/src/pages/DocumentDetailPage.vue?vue&type=script&setup=true&lang.ts, C:/Users/Sai Neela/Documents/Random Projects/Papra/src/stores/app.ts, C:/Users/Sai Neela/Documents/Random Projects/Papra/src/stores/app.ts, C:/Users/Sai Neela/Documents/Random Projects/Papra/src/stores/app.ts but also statically imported by C:/Users/Sai Neela/Documents/Random Projects/Papra/src/pages/DocumentDetailPage.vue?vue&type=script&setup=true&lang.ts, C:/Users/Sai Neela/Documents/Random Projects/Papra/src/pages/TagsPage.vue?vue&type=script&setup=true&lang.ts, C:/Users/Sai Neela/Documents/Random Projects/Papra/src/pages/TrashPage.vue?vue&type=script&setup=true&lang.ts, C:/Users/Sai Neela/Documents/Random Projects/Papra/src/pages/UploadPage.vue?vue&type=script&setup=true&lang.ts, C:/Users/Sai Neela/Documents/Random Projects/Papra/src/stores/app.ts, dynamic import will not move module into another chunk.
+[39m
+computing gzip size...
+[2mdist/[22m[32mindex.html                                                           [39m[1m[2m  0.51 kB[22m[1m[22m[2m │ gzip:   0.32 kB[22m
+[2mdist/[22m[32massets/inter-vietnamese-wght-normal-CBcvBZtf.woff2                   [39m[1m[2m 10.25 kB[22m[1m[22m
+[2mdist/[22m[32massets/inter-greek-ext-wght-normal-DlzME5K_.woff2                    [39m[1m[2m 11.23 kB[22m[1m[22m
+[2mdist/[22m[32massets/inter-cyrillic-wght-normal-DqGufNeO.woff2                     [39m[1m[2m 18.75 kB[22m[1m[22m
+[2mdist/[22m[32massets/inter-greek-wght-normal-CkhJZR-_.woff2                        [39m[1m[2m 19.00 kB[22m[1m[22m
+[2mdist/[22m[32massets/inter-cyrillic-ext-wght-normal-BOeWTOD4.woff2                 [39m[1m[2m 25.96 kB[22m[1m[22m
+[2mdist/[22m[32massets/inter-latin-wght-normal-Dx4kXJAl.woff2                        [39m[1m[2m 48.26 kB[22m[1m[22m
+[2mdist/[22m[32massets/inter-latin-ext-wght-normal-DO1Apj_S.woff2                    [39m[1m[2m 85.07 kB[22m[1m[22m
+[2mdist/[22m[35massets/index-Cun9bkHI.css                                            [39m[1m[2m209.58 kB[22m[1m[22m[2m │ gzip:  27.98 kB[22m
+[2mdist/[22m[36massets/web-CRBe95KU.js                                               [39m[1m[2m  0.39 kB[22m[1m[22m[2m │ gzip:   0.26 kB[22m
+[2mdist/[22m[36massets/format-BseKaS-n.js                                            [39m[1m[2m  0.55 kB[22m[1m[22m[2m │ gzip:   0.36 kB[22m
+[2mdist/[22m[36massets/Skeleton-zl8RNH73.js                                          [39m[1m[2m  0.61 kB[22m[1m[22m[2m │ gzip:   0.40 kB[22m
+[2mdist/[22m[36massets/DocumentCard.vue_vue_type_script_setup_true_lang-BP3GSeuH.js  [39m[1m[2m  2.33 kB[22m[1m[22m[2m │ gzip:   1.16 kB[22m
+[2mdist/[22m[36massets/UploadPage-BEtiM3Ow.js                                        [39m[1m[2m  4.12 kB[22m[1m[22m[2m │ gzip:   1.89 kB[22m
+[2mdist/[22m[36massets/FormField-C2vmhlEg.js                                         [39m[1m[2m  4.15 kB[22m[1m[22m[2m │ gzip:   1.55 kB[22m
+[2mdist/[22m[36massets/DashboardPage-Byqls-v3.js                                     [39m[1m[2m  4.56 kB[22m[1m[22m[2m │ gzip:   1.94 kB[22m
+[2mdist/[22m[36massets/TrashPage-DMtdYGqC.js                                         [39m[1m[2m  4.63 kB[22m[1m[22m[2m │ gzip:   1.84 kB[22m
+[2mdist/[22m[36massets/TagsPage-D2fpQWWH.js                                          [39m[1m[2m  5.55 kB[22m[1m[22m[2m │ gzip:   2.27 kB[22m
+[2mdist/[22m[36massets/SearchPage-DjgT1QZn.js                                        [39m[1m[2m  5.72 kB[22m[1m[22m[2m │ gzip:   2.41 kB[22m
+[2mdist/[22m[36massets/Modal-C_ckIYix.js                                             [39m[1m[2m  6.27 kB[22m[1m[22m[2m │ gzip:   2.11 kB[22m
+[2mdist/[22m[36massets/index-CRHxjQPP.js                                             [39m[1m[2m  8.08 kB[22m[1m[22m[2m │ gzip:   3.37 kB[22m
+[2mdist/[22m[36massets/Input-C_JSUK8h.js                                             [39m[1m[2m  9.27 kB[22m[1m[22m[2m │ gzip:   2.64 kB[22m
+[2mdist/[22m[36massets/ConnectPage-Djxh8lf1.js                                       [39m[1m[2m 11.53 kB[22m[1m[22m[2m │ gzip:   3.65 kB[22m
+[2mdist/[22m[36massets/SettingsPage-DYDqwFrc.js                                      [39m[1m[2m 12.71 kB[22m[1m[22m[2m │ gzip:   3.70 kB[22m
+[2mdist/[22m[36massets/overlay-D9QEA5o6.js                                           [39m[1m[2m 20.72 kB[22m[1m[22m[2m │ gzip:   6.38 kB[22m
+[2mdist/[22m[36massets/Drawer-DSN_094u.js                                            [39m[1m[2m 32.74 kB[22m[1m[22m[2m │ gzip:   9.57 kB[22m
+[2mdist/[22m[36massets/DocumentDetailPage-xnW6ahTS.js                                [39m[1m[2m111.40 kB[22m[1m[22m[2m │ gzip:  30.28 kB[22m
+[2mdist/[22m[36massets/index-CJYiUugl.js                                             [39m[1m[2m338.30 kB[22m[1m[22m[2m │ gzip: 116.26 kB[22m
+[32m✓ built in 4.87s[39m

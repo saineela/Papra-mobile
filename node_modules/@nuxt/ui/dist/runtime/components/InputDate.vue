@@ -1,0 +1,175 @@
+<script>
+import theme from "#build/ui/input-date";
+</script>
+
+<script setup>
+import { computed, onMounted, onScopeDispose, ref } from "vue";
+import { useForwardProps } from "../composables/useForwardProps";
+import { DateField as SingleDateField, DateRangeField as RangeDateField } from "reka-ui/namespaced";
+import { reactiveOmit, createReusableTemplate } from "@vueuse/core";
+import { useAppConfig } from "#imports";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useFieldGroup } from "../composables/useFieldGroup";
+import { useComponentIcons } from "../composables/useComponentIcons";
+import { useFormField } from "../composables/useFormField";
+import { tv } from "../utils/tv";
+import UIcon from "./Icon.vue";
+import UAvatar from "./Avatar.vue";
+defineOptions({ inheritAttrs: false });
+const _props = defineProps({
+  as: { type: null, required: false },
+  color: { type: null, required: false },
+  variant: { type: null, required: false },
+  size: { type: null, required: false },
+  highlight: { type: Boolean, required: false },
+  fixed: { type: Boolean, required: false },
+  autofocus: { type: Boolean, required: false },
+  autofocusDelay: { type: Number, required: false, default: 0 },
+  separatorIcon: { type: null, required: false },
+  range: { type: Boolean, required: false },
+  defaultValue: { type: null, required: false },
+  modelValue: { type: null, required: false },
+  class: { type: null, required: false },
+  ui: { type: Object, required: false },
+  icon: { type: null, required: false },
+  avatar: { type: Object, required: false },
+  leading: { type: Boolean, required: false },
+  leadingIcon: { type: null, required: false },
+  trailing: { type: Boolean, required: false },
+  trailingIcon: { type: null, required: false },
+  loading: { type: Boolean, required: false },
+  loadingIcon: { type: null, required: false },
+  defaultPlaceholder: { type: Object, required: false },
+  placeholder: { type: Object, required: false },
+  hourCycle: { type: null, required: false },
+  step: { type: Object, required: false },
+  stepSnapping: { type: Boolean, required: false },
+  granularity: { type: String, required: false },
+  hideTimeZone: { type: Boolean, required: false },
+  maxValue: { type: Object, required: false },
+  minValue: { type: Object, required: false },
+  locale: { type: String, required: false },
+  disabled: { type: Boolean, required: false },
+  readonly: { type: Boolean, required: false },
+  isDateUnavailable: { type: Function, required: false },
+  id: { type: String, required: false },
+  name: { type: String, required: false },
+  required: { type: Boolean, required: false }
+});
+const emits = defineEmits(["update:modelValue", "change", "blur", "focus", "update:placeholder"]);
+const slots = defineSlots();
+const props = useComponentProps("inputDate", _props);
+const appConfig = useAppConfig();
+const rootProps = useForwardProps(reactiveOmit(props, "id", "name", "range", "modelValue", "defaultValue", "color", "variant", "size", "highlight", "fixed", "disabled", "autofocus", "autofocusDelay", "icon", "avatar", "leading", "leadingIcon", "trailing", "trailingIcon", "loading", "loadingIcon", "separatorIcon", "class", "ui"), emits);
+const { emitFormBlur, emitFormFocus, emitFormChange, emitFormInput, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField(_props);
+const { orientation, size: fieldGroupSize } = useFieldGroup(_props);
+const { isLeading, isTrailing, leadingIconName, trailingIconName } = useComponentIcons(props);
+const [DefineSegmentsTemplate, ReuseSegmentsTemplate] = createReusableTemplate();
+const color = computed(() => formFieldColor.value ?? props.color);
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight);
+const size = computed(() => fieldGroupSize.value ?? formFieldSize.value ?? props.size);
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled);
+const ui = computed(() => tv({ extend: theme, ...appConfig.ui?.inputDate || {} })({
+  color: color.value,
+  variant: props.variant,
+  size: size.value,
+  highlight: highlight.value,
+  fixed: props.fixed,
+  loading: props.loading,
+  leading: isLeading.value || !!props.avatar || !!slots.leading,
+  trailing: isTrailing.value || !!slots.trailing,
+  fieldGroup: orientation.value
+}));
+const inputsRef = ref([]);
+function setInputRef(index, el) {
+  inputsRef.value[index] = el;
+}
+function onUpdate(value) {
+  const event = new Event("change", { target: { value } });
+  emits("change", event);
+  emitFormChange();
+  emitFormInput();
+}
+function onBlur(event) {
+  emitFormBlur();
+  emits("blur", event);
+}
+function onFocus(event) {
+  emitFormFocus();
+  emits("focus", event);
+}
+function autoFocus() {
+  if (props.autofocus) {
+    inputsRef.value[0]?.$el?.focus();
+  }
+}
+let autofocusTimeoutId;
+onMounted(() => {
+  autofocusTimeoutId = setTimeout(() => {
+    autoFocus();
+  }, props.autofocusDelay);
+});
+onScopeDispose(() => clearTimeout(autofocusTimeoutId));
+const DateField = computed(() => props.range ? RangeDateField : SingleDateField);
+defineExpose({
+  inputsRef
+});
+</script>
+
+<template>
+  <DefineSegmentsTemplate v-slot="{ segments, type }">
+    <DateField.Input
+      v-for="(segment, index) in segments"
+      :key="`${segment.part}-${index}`"
+      :ref="(el) => setInputRef(index, el)"
+      :type="type"
+      :part="segment.part"
+      data-slot="segment"
+      :class="ui.segment({ class: props.ui?.segment })"
+      :data-segment="segment.part"
+    >
+      {{ segment.value.trim() }}
+    </DateField.Input>
+  </DefineSegmentsTemplate>
+
+  <DateField.Root
+    :id="id"
+    v-slot="{ segments }"
+    data-slot="base"
+    v-bind="{ ...rootProps, ...$attrs, ...ariaAttrs }"
+    :model-value="props.modelValue"
+    :default-value="props.defaultValue"
+    :name="name"
+    :disabled="disabled"
+    :class="ui.base({ class: [props.ui?.base, props.class] })"
+    @update:model-value="onUpdate"
+    @blur="onBlur"
+    @focus="onFocus"
+  >
+    <template v-if="Array.isArray(segments)">
+      <ReuseSegmentsTemplate :segments="segments" />
+    </template>
+    <template v-else>
+      <ReuseSegmentsTemplate :segments="segments.start" type="start" />
+      <slot name="separator" :ui="ui">
+        <UIcon :name="props.separatorIcon || appConfig.ui.icons.minus" data-slot="separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
+      </slot>
+      <ReuseSegmentsTemplate :segments="segments.end" type="end" />
+    </template>
+
+    <slot :ui="ui" />
+
+    <span v-if="isLeading || !!props.avatar || !!slots.leading" data-slot="leading" :class="ui.leading({ class: props.ui?.leading })">
+      <slot name="leading" :ui="ui">
+        <UIcon v-if="isLeading && leadingIconName" :name="leadingIconName" data-slot="leadingIcon" :class="ui.leadingIcon({ class: props.ui?.leadingIcon })" />
+        <UAvatar v-else-if="!!props.avatar" :size="props.ui?.leadingAvatarSize || ui.leadingAvatarSize()" v-bind="props.avatar" data-slot="leadingAvatar" :class="ui.leadingAvatar({ class: props.ui?.leadingAvatar })" />
+      </slot>
+    </span>
+
+    <span v-if="isTrailing || !!slots.trailing" data-slot="trailing" :class="ui.trailing({ class: props.ui?.trailing })">
+      <slot name="trailing" :ui="ui">
+        <UIcon v-if="trailingIconName" :name="trailingIconName" data-slot="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
+      </slot>
+    </span>
+  </DateField.Root>
+</template>

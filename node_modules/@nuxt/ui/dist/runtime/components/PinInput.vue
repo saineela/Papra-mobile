@@ -1,0 +1,136 @@
+<script>
+import theme from "#build/ui/pin-input";
+</script>
+
+<script setup>
+import { ref, computed, onMounted, onScopeDispose } from "vue";
+import { PinInputInput, PinInputRoot } from "reka-ui";
+import { useForwardProps } from "../composables/useForwardProps";
+import { reactivePick } from "@vueuse/core";
+import { useAppConfig } from "#imports";
+import { useComponentProps } from "../composables/useComponentProps";
+import { useFormField } from "../composables/useFormField";
+import { looseToNumber } from "../utils";
+import { tv } from "../utils/tv";
+const _props = defineProps({
+  as: { type: null, required: false },
+  color: { type: null, required: false },
+  variant: { type: null, required: false },
+  size: { type: null, required: false },
+  length: { type: [Number, String], required: false, default: 5 },
+  autofocus: { type: Boolean, required: false },
+  autofocusDelay: { type: Number, required: false, default: 0 },
+  highlight: { type: Boolean, required: false },
+  fixed: { type: Boolean, required: false },
+  separator: { type: [Number, Array], required: false },
+  class: { type: null, required: false },
+  ui: { type: Object, required: false },
+  defaultValue: { type: null, required: false },
+  disabled: { type: Boolean, required: false },
+  id: { type: String, required: false },
+  mask: { type: Boolean, required: false },
+  modelValue: { type: null, required: false },
+  name: { type: String, required: false },
+  otp: { type: Boolean, required: false },
+  placeholder: { type: String, required: false },
+  required: { type: Boolean, required: false },
+  type: { type: null, required: false, default: "text" }
+});
+const emits = defineEmits(["update:modelValue", "complete", "change", "blur"]);
+defineSlots();
+const props = useComponentProps("pinInput", _props);
+const appConfig = useAppConfig();
+const rootProps = useForwardProps(reactivePick(props, "disabled", "id", "mask", "name", "otp", "required", "type"), emits);
+const { emitFormInput, emitFormFocus, emitFormChange, emitFormBlur, size: formFieldSize, color: formFieldColor, id, name, highlight: formFieldHighlight, disabled: formFieldDisabled, ariaAttrs } = useFormField(_props);
+const color = computed(() => formFieldColor.value ?? props.color);
+const highlight = computed(() => formFieldHighlight.value ?? props.highlight);
+const size = computed(() => formFieldSize.value ?? props.size);
+const disabled = computed(() => formFieldDisabled.value ?? props.disabled);
+const ui = computed(() => tv({ extend: theme, ...appConfig.ui?.pinInput || {} })({
+  color: color.value,
+  variant: props.variant,
+  size: size.value,
+  highlight: highlight.value,
+  fixed: props.fixed
+}));
+const inputsRef = ref([]);
+function setInputRef(index, el) {
+  inputsRef.value[index] = el;
+}
+function onComplete(value) {
+  const event = new Event("change", { target: { value } });
+  emits("change", event);
+  emitFormChange();
+}
+function onBlur(event) {
+  if (!event.relatedTarget) {
+    emits("blur", event);
+    emitFormBlur();
+  }
+}
+function autoFocus() {
+  if (props.autofocus) {
+    inputsRef.value[0]?.$el?.focus();
+  }
+}
+function shouldInsertSeparator(index) {
+  if (props.separator === void 0) {
+    return false;
+  }
+  const position = index + 1;
+  if (position >= looseToNumber(props.length)) {
+    return false;
+  }
+  if (Array.isArray(props.separator)) {
+    return props.separator.includes(position);
+  }
+  const separator = looseToNumber(props.separator);
+  return Number.isInteger(separator) && separator > 0 && position % separator === 0;
+}
+let autofocusTimeoutId;
+onMounted(() => {
+  autofocusTimeoutId = setTimeout(() => {
+    autoFocus();
+  }, props.autofocusDelay);
+});
+onScopeDispose(() => clearTimeout(autofocusTimeoutId));
+defineExpose({
+  inputsRef
+});
+</script>
+
+<template>
+  <PinInputRoot
+    v-bind="{ ...rootProps, ...ariaAttrs }"
+    :id="id"
+    :name="name"
+    :placeholder="props.placeholder"
+    :model-value="props.modelValue"
+    :default-value="props.defaultValue"
+    data-slot="root"
+    :class="ui.root({ class: [props.ui?.root, props.class] })"
+    @update:model-value="emitFormInput()"
+    @complete="onComplete"
+  >
+    <template v-for="(ids, index) in looseToNumber(props.length)" :key="ids">
+      <PinInputInput
+        :ref="(el) => setInputRef(index, el)"
+        :index="index"
+        data-slot="base"
+        :class="ui.base({ class: props.ui?.base })"
+        :disabled="disabled"
+        @blur="onBlur"
+        @focus="emitFormFocus"
+      />
+      <span
+        v-if="shouldInsertSeparator(index)"
+        data-slot="separator"
+        role="presentation"
+        aria-hidden="true"
+        :class="ui.separator({ class: props.ui?.separator })"
+      >
+        <slot name="separator" :index="index">•</slot>
+      </span>
+    </template>
+  </PinInputRoot>
+</template>

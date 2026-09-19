@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --font-sans: "Inter var", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------- Papra brand tokens ---------- */
+/* Dark is the default (Papra's signature dark zinc + sky) */
+:root {
+  --primary: oklch(0.6847 0.1479 237.32);
+  --primary-accented: oklch(0.75 0.16 237.32);
+  --primary-dim: oklch(0.55 0.13 237.32);
+
+  --background: oklch(0.1408 0.0044 285.82);
+  --foreground: oklch(0.9851 0 0);
+  --muted: oklch(0.2034 0.0044 285.82);
+  --muted-foreground: oklch(0.7118 0.0129 286.07);
+  --border: oklch(0.2739 0.0055 286.03);
+  --border-accented: oklch(0.36 0.0055 286.03);
+  --ring: oklch(0.6847 0.1479 237.32);
+
+  --success: oklch(0.6959 0.1491 162.48);
+  --warning: oklch(0.7686 0.1647 70.08);
+  --error: oklch(0.6368 0.2078 25.33);
+
+  /* Papra client tag palette */
+  --tag-cyan: #14b8a6;
+  --tag-green: #22c55e;
+  --tag-yellow: #eab308;
+  --tag-orange: #f97316;
+  --tag-red: #ef4444;
+  --tag-pink: #ec4899;
+  --tag-purple: #a855f7;
+  --tag-blue: #3b82f6;
+  --tag-gray: #6b7280;
+}
+
+/* Light theme override */
+:root.light {
+  --primary: oklch(0.55 0.14 237.32);
+  --primary-accented: oklch(0.48 0.13 237.32);
+  --primary-dim: oklch(0.7 0.14 237.32);
+
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.205 0.006 285.82);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.5 0.013 286.07);
+  --border: oklch(0.92 0 0);
+  --border-accented: oklch(0.85 0 0);
+  --ring: oklch(0.55 0.14 237.32);
+}
+
+/* Map Papra tokens onto Nuxt UI semantic vars */
+:root {
+  --ui-primary: var(--primary);
+  --ui-background: var(--background);
+  --ui-foreground: var(--foreground);
+  --ui-muted: var(--muted);
+  --ui-muted-foreground: var(--muted-foreground);
+  --ui-border: var(--border);
+  --ui-border-accented: var(--border-accented);
+  --ui-ring: var(--ring);
+  --ui-radius: 0.75rem;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+/* Soft card surface */
+.surface {
+  background: var(--muted);
+  border: 1px solid var(--border-accented);
+  border-radius: 1rem;
+}
+
+/* Hide scrollbars on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Safe area helpers */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
