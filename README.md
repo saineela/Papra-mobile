@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="src/assets/papra-logo.png" width="650" title="TaskbarMusic logo">
+</p>
+
 # Papra Mobile
 
 Papra Mobile is a cross-platform client for [Papra](https://github.com/papra-hq/papra), a self-hosted document management server. It provides a focused mobile workflow for connecting to a Papra server, browsing documents, scanning pages, uploading files, searching, tagging, and managing the trash.
