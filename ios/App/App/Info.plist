@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-        <string>Neelas Scanner</string>
+        <string>Papra</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,9 +21,9 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Neelas Scanner uses the camera to scan documents.</string>
+	<string>Papra uses the camera to scan documents.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Neelas Scanner uses your photo library to import document images.</string>
+	<string>Papra uses your photo library to import document images.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

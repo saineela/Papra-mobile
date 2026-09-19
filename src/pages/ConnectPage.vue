@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from '@nuxt/ui/runtime/composables/useToast.js'
 import { useConnectionStore } from '@/stores/app'
 import { useAppStore } from '@/stores/theme'
+import papraLogo from '@/assets/papra-logo.png'
 
 const router = useRouter()
 const toast = useToast()
@@ -101,13 +102,13 @@ async function connect() {
     <div class="mx-auto flex w-full max-w-md flex-1 flex-col px-6">
       <!-- Brand -->
       <div class="mt-16 flex flex-col items-center text-center">
-        <div
-          class="flex size-16 items-center justify-center rounded-2xl bg-[var(--primary-scale)] ring-1 ring-[var(--primary)]/30"
-        >
-          <UIcon name="i-lucide-folder-open" class="size-8 text-[var(--primary)]" />
-        </div>
+        <img
+          :src="papraLogo"
+          alt="Papra"
+          class="size-16 rounded-2xl object-cover shadow-sm ring-1 ring-black/10"
+        />
         <h1 class="mt-5 text-3xl font-semibold tracking-tight text-[var(--foreground)]">
-          Neelas Scanner
+          Papra
         </h1>
         <p class="mt-2 max-w-xs text-sm leading-relaxed text-[var(--muted-foreground)]">
           Connect to your self-hosted document vault. Everything stays on your server.
