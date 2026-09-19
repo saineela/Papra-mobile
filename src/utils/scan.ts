@@ -445,8 +445,8 @@ const A4 = { width: 595.28, height: 841.89 }
 export async function buildScanPdf(canvases: HTMLCanvasElement[]): Promise<Uint8Array> {
   const { PDFDocument } = await import('pdf-lib')
   const pdf = await PDFDocument.create()
-  pdf.setProducer('Neelas Scanner')
-  pdf.setCreator('Neelas Scanner')
+  pdf.setProducer('Papra')
+  pdf.setCreator('Papra')
 
   const margin = 12
 

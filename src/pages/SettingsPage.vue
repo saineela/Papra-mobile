@@ -302,7 +302,7 @@ async function confirmDisconnect() {
           <button class="flex w-full items-center justify-between p-4 active:bg-[var(--muted)]" @click="aboutOpen = true">
             <span class="flex items-center gap-3 text-sm text-[var(--foreground)]">
               <UIcon name="i-lucide-info" class="size-4 text-[var(--muted-foreground)]" />
-              About Neelas Scanner
+              About Papra
             </span>
             <UIcon name="i-lucide-chevron-right" class="size-4 text-[var(--muted-foreground)]" />
           </button>
@@ -322,7 +322,7 @@ async function confirmDisconnect() {
     </main>
 
     <!-- About modal -->
-    <UModal v-model:open="aboutOpen" title="Neelas Scanner">
+    <UModal v-model:open="aboutOpen" title="Papra">
       <template #body>
         <div class="space-y-3 text-sm text-[var(--muted-foreground)]">
           <p>

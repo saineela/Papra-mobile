@@ -1,6 +1,6 @@
 {
   "appId": "app.papra.mobile",
-  "appName": "Neelas Scanner",
+  "appName": "Papra",
   "webDir": "dist",
   "android": {
     "allowMixedContent": false
