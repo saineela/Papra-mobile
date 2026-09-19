@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="src/assets/papra-logo.png" width="300" title="TaskbarMusic logo">
+    <img src="src/assets/papra-logo.png" width="220" title="Papra logo">
 </p>
 
 # Papra Mobile
