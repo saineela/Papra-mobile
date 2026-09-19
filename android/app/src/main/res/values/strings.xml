@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Neelas Scanner</string>
+    <string name="title_activity_main">Neelas Scanner</string>
+    <string name="package_name">app.papra.mobile</string>
+    <string name="custom_url_scheme">app.papra.mobile</string>
+</resources>

@@ -1,0 +1,16 @@
+{
+  "appId": "app.papra.mobile",
+  "appName": "Neelas Scanner",
+  "webDir": "dist",
+  "android": {
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    }
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}
